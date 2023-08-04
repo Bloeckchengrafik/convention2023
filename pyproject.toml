@@ -7,7 +7,6 @@ readme = "README.md"
 packages = [
     {include = "server", from = "src"},
     {include = "bootstrap", from = "src"},
-    {include = "scanner", from = "src"}
 ]
 
 [tool.poetry.dependencies]

@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "convention2023"
+version = "0.1.0"
+description = ""
+authors = ["bergschneider <magiclake@gmx.de>"]
+readme = "README.md"
+packages = [
+    {include = "server", from = "src"},
+    {include = "bootstrap", from = "src"},
+    {include = "scanner", from = "src"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.101.0"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+
+[tool.poetry.scripts]
+serve = "src.bootstrap:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

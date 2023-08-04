@@ -33,8 +33,7 @@
 {#if result}
     <span class="d-flex justify-content-center gap-2"><ChatCircleDots size="20"/>{result.message}</span>
     <span class="d-flex justify-content-center gap-2"><Clock size="20"/>{result.server_time}</span>
-    <span class="d-flex justify-content-center gap-2"><GitBranch size="20"/>{result.version}
-        #{result.git_commit_hash}</span>
+    <span class="d-flex justify-content-center gap-2"><GitBranch size="20"/>{result.version}#{result.git_commit_hash}</span>
     {#if neededUpdate < lastUpdate}
         <span class="status status-green">Online</span>
     {:else}

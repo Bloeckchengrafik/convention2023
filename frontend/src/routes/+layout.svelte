@@ -2,8 +2,6 @@
     import "toastify-js/src/toastify.css";
     import Navigation from "$lib/nav/Navigation.svelte";
     import "$lib/notify";
-
-    console.log("Welcome");
 </script>
 
 <div class="page page-body my-0">

@@ -3,3 +3,5 @@ venv
 .venv
 
 *.blend1
+
+database.db

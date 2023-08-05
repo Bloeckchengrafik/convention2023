@@ -13,6 +13,7 @@ packages = [
 python = "^3.11"
 fastapi = "^0.101.0"
 uvicorn = {extras = ["standard"], version = "^0.23.2"}
+sqlalchemy = "^2.0.19"
 
 [tool.poetry.scripts]
 serve = "src.bootstrap:main"

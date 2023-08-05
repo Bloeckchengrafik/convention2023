@@ -1,15 +1,23 @@
+import asyncio
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dataclasses import dataclass
 
 import time
 
+from .routes import router
 from .utils import git_commit_hash
+from .datastore import init_database
+
+loop = asyncio.get_event_loop()
+
+loop.create_task(init_database())
 
 app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-
+app.include_router(router)
 
 @dataclass
 class IndexResponse:

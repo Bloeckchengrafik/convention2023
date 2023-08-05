@@ -16,3 +16,9 @@ export async function endpoint<T>(ep: string): Promise<T> {
     }
     return await res.json();
 }
+
+export function emptyPromise<T>(): Promise<T> {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return new Promise<T>(() => {
+    })
+}

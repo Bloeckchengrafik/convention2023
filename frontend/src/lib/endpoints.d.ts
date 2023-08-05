@@ -5,10 +5,15 @@ export type IndexEndpoint = {
     version: string;
 };
 
-export type PipelineStatus = 'pending' | 'processing' | 'cutting' | 'done' | 'error';
+export type PipelineStatus = 'pending' | 'processable' | 'processing' | 'cutting' | 'done' | 'error';
 
 export type Pipeline = {
     id: number;
     status: PipelineStatus;
     timestamp: string;
+}
+
+
+export type PipelineWithImageCount = Pipeline & {
+    image_count: number;
 }

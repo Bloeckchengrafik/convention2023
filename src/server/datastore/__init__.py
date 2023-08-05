@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, Column, Integer, DateTime, Enum, ForeignKe
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
-from server.datastore.enum import PipelineStatus
+from server.datastore.enum import PipelineStatus, ScannerPosition
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db"
 
@@ -35,7 +35,7 @@ class ScanImages(Base):
     phi = Column(Float)
     theta = Column(Float)
     gamma = Column(Float)
-    position = Column(Enum(PipelineStatus))
+    position = Column(Enum(ScannerPosition))
     image = Column(String)
 
     pipeline = relationship("Pipeline", back_populates="images")

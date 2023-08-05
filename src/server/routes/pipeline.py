@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from server.datastore import Pipeline, PipelineStatus, get_db
+from server.datastore import Pipeline, PipelineStatus, get_db, ScanImages
 
 pipeline_router = APIRouter()
 
@@ -13,7 +13,14 @@ def process_index(db: Session = Depends(get_db)):
 
 @pipeline_router.get("/id/{job_id}")
 def process_index(job_id: int, db: Session = Depends(get_db)):
-    return db.query(Pipeline).filter(Pipeline.id == job_id).first()
+    return {
+        **db.query(Pipeline).filter(Pipeline.id == job_id).first().__dict__,
+        "image_count": len(db.query(ScanImages).filter(ScanImages.pipeline_id == job_id).all())
+    }
+
+@pipeline_router.get("/id/{job_id}/images")
+def process_index(job_id: int, db: Session = Depends(get_db)):
+    return db.query(ScanImages).filter(ScanImages.pipeline_id == job_id).all()
 
 @pipeline_router.get("/id/{job_id}/complete_early")
 def process_index(job_id: int, db: Session = Depends(get_db)):

@@ -10,9 +10,7 @@ from .routes import router
 from .utils import git_commit_hash
 from .datastore import init_database
 
-loop = asyncio.get_event_loop()
-
-loop.create_task(init_database())
+init_database()
 
 app = FastAPI()
 

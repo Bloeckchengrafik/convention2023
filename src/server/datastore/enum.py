@@ -1,12 +1,29 @@
 from enum import StrEnum
 
 
-class JobStatus(StrEnum):
+class PipelineStatus(StrEnum):
     """
     Enum for job status
     """
     PENDING = 'pending'
+    PROCESSABLE = 'processable'
     PROCESSING = 'processing'
     CUTTING = 'cutting'
     DONE = 'done'
     ERROR = 'error'
+
+
+class DatasetType(StrEnum):
+    """
+    Enum for dataset type
+    """
+    SCAN = 'machine'
+    TEST = 'test'
+
+
+class ScannerPosition(StrEnum):
+    """
+    Enum for scanner position
+    """
+    LEFT = 'left'
+    RIGHT = 'right'

@@ -364,6 +364,17 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "python-ulid"
+version = "1.1.0"
+description = "Universally Unique Lexicographically Sortable Identifier"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "python-ulid-1.1.0.tar.gz", hash = "sha256:5fb5e4a91db8ca93e8938a613360b3def299b60d41f847279a8c39c9b2e9c65e"},
+    {file = "python_ulid-1.1.0-py3-none-any.whl", hash = "sha256:88c952f6be133dbede19c907d72d26717d2691ec8421512b573144794d891e24"},
+]
+
+[[package]]
 name = "pyyaml"
 version = "6.0.1"
 description = "YAML parser and emitter for Python"
@@ -714,4 +725,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ef1941230d2f1db8ffe853ec816c940213e5cabe6378bf2c19df46352adbfbdb"
+content-hash = "72200eca0fc02f22ed6ee80587264bcfe2c18ffebd23bd26e12dccd66f480b0d"

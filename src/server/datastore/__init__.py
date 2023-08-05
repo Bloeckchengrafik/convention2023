@@ -1,10 +1,10 @@
 import datetime
 
-from sqlalchemy import create_engine, Column, Integer, DateTime, Enum
+from sqlalchemy import create_engine, Column, Integer, DateTime, Enum, ForeignKey, String, Float
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
-from server.datastore.enum import JobStatus
+from server.datastore.enum import PipelineStatus
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db"
 
@@ -22,10 +22,26 @@ class Pipeline(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
-    status = Column(Enum(JobStatus))
+    status = Column(Enum(PipelineStatus))
+
+    images = relationship("ScanImages", back_populates="pipeline")
+
+class ScanImages(Base):
+    __tablename__ = "scan_images"
+
+    id = Column(Integer, primary_key=True, index=True)
+    pipeline_id = Column(Integer, ForeignKey(Pipeline.id))
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+    phi = Column(Float)
+    theta = Column(Float)
+    gamma = Column(Float)
+    position = Column(Enum(PipelineStatus))
+    image = Column(String)
+
+    pipeline = relationship("Pipeline", back_populates="images")
 
 
-async def init_database():
+def init_database():
     Base.metadata.create_all(bind=engine)
 
 
@@ -35,3 +51,16 @@ def get_db():
         yield db
     finally:
         db.close()
+
+class DbSession:
+    """
+    Context manager for database sessions
+    """
+    def __init__(self):
+        self.db = SessionLocal()
+
+    def __enter__(self):
+        return self.db
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.db.close()

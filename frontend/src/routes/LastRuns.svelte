@@ -9,7 +9,7 @@
     poll(async () => {
         let awaited = await endpoint<Pipeline[]>("pipeline")
         data = Promise.resolve(awaited)
-    }, 5000)
+    }, 1000)
 </script>
 
 {#await data}

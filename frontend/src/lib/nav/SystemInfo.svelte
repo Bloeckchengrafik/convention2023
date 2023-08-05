@@ -6,7 +6,7 @@
 
     let result: IndexEndpoint | null = null
     let lastUpdate = Date.UTC(0, 0)
-    let neededUpdate = Date.now() - 700
+    let neededUpdate = Date.now() - 1000
     let wasOffline = true
 
     poll(async () => {
@@ -15,7 +15,7 @@
     }, 500);
 
     poll(async () => {
-        neededUpdate = Date.now() - 700
+        neededUpdate = Date.now() - 1000
         if (neededUpdate < lastUpdate) {
             if (wasOffline) {
                 wasOffline = false

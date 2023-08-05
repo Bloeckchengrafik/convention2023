@@ -24,8 +24,16 @@
                 </p>
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <a href="/pipelines/new" class="btn btn-primary"><TestTube size="20" /> &nbsp; Use Test Data</a>
-                <a href="/pipelines/new" class="btn btn-primary"><Scan size="20" /> &nbsp; Use Scanner Data</a>
+                <a href="/pipelines/new?source=test" class="btn btn-primary">
+                    <TestTube size="20"/> &nbsp; Use Test Data</a>
+                <a
+                        href="/pipelines/new?source=scan"
+                        class="btn btn-primary"
+                        on:click|preventDefault={() => {
+                            console.log("The scanner is not available yet.");
+                        }}
+                >
+                    <Scan size="20"/> &nbsp; Use Scanner Data</a>
             </div>
         </div>
     </div>
@@ -35,7 +43,7 @@
                 <h1>Last Runs</h1>
             </div>
             <div class="card-body overflow-hidden h-full">
-                <LastRuns />
+                <LastRuns/>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@
         PlayPause,
         Flag,
         Cpu,
+        Clock,
         X,
         Scissors,
         CheckCircle,
@@ -18,6 +19,7 @@
 
     let statusColors = {
         "pending": "indigo",
+        "processable": "purple",
         "processing": "orange",
         "cutting": "cyan",
         "done": "lime",
@@ -26,6 +28,7 @@
 
     let statusIcons = {
         "pending": PlayPause,
+        "processable": Clock,
         "processing": Cpu,
         "cutting": Scissors,
         "done": CheckCircle,

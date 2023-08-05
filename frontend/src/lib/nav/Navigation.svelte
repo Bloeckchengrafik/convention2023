@@ -4,10 +4,12 @@
 </script>
 
 <div class="d-flex flex-row justify-content-between align-items-center">
-    <div class="d-flex flex-row gap-3">
+    <a class="d-flex flex-row gap-3 text-white text-decoration-none" href="/">
         <Stack size="32"/>
-        <h1>3Scan</h1>
-    </div>
+        <h1>
+            <span class="text-primary">3D</span>Cut
+        </h1>
+    </a>
     <div class="d-flex flex-row gap-3 justify-content-center align-items-center h-full">
         <SystemInfo/>
     </div>

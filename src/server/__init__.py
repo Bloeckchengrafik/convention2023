@@ -1,5 +1,3 @@
-import asyncio
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dataclasses import dataclass
@@ -28,7 +26,7 @@ class IndexResponse:
 @app.get("/")
 def index() -> IndexResponse:
     return IndexResponse(
-        message="This is awkward, nothing works yet. Except for this message.",
+        message="Damn, we're live!",
         server_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
         git_commit_hash=git_commit_hash()
     )

@@ -4,6 +4,10 @@
     import "$lib/notify";
 </script>
 
+<svelte:head>
+    <title>3DC Pro</title>
+</svelte:head>
+
 <div class="page page-body my-0">
     <div class="page-header py-3">
         <div class="container-xl">

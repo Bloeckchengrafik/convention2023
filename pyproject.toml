@@ -15,6 +15,9 @@ fastapi = "^0.101.0"
 uvicorn = {extras = ["standard"], version = "^0.23.2"}
 sqlalchemy = "^2.0.19"
 python-ulid = "^1.1.0"
+matplotlib = "^3.7.2"
+numpy = "^1.25.2"
+opencv-python = "^4.8.0.74"
 
 [tool.poetry.scripts]
 serve = "src.bootstrap:main"

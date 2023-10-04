@@ -2,6 +2,7 @@
     import "toastify-js/src/toastify.css";
     import Navigation from "$lib/nav/Navigation.svelte";
     import "$lib/notify";
+    import LoginOverlay from "$lib/LoginOverlay.svelte";
 </script>
 
 <svelte:head>
@@ -20,3 +21,5 @@
         </div>
     </div>
 </div>
+
+<LoginOverlay />

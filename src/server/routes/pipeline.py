@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from server.datastore import Pipeline, PipelineStatus, get_db, ScanImages
+from server.datastore import Pipeline, PipelineStatus, get_db, ScanSample
 
 pipeline_router = APIRouter()
 
@@ -15,12 +15,14 @@ def process_index(db: Session = Depends(get_db)):
 def process_index(job_id: int, db: Session = Depends(get_db)):
     return {
         **db.query(Pipeline).filter(Pipeline.id == job_id).first().__dict__,
-        "image_count": len(db.query(ScanImages).filter(ScanImages.pipeline_id == job_id).all())
+        "sample_count": len(db.query(ScanSample).filter(ScanSample.pipeline_id == job_id).all())
     }
 
-@pipeline_router.get("/id/{job_id}/images")
+
+@pipeline_router.get("/id/{job_id}/samples")
 def process_index(job_id: int, db: Session = Depends(get_db)):
-    return db.query(ScanImages).filter(ScanImages.pipeline_id == job_id).all()
+    return db.query(ScanSample).filter(ScanSample.pipeline_id == job_id).all()
+
 
 @pipeline_router.get("/id/{job_id}/complete_early")
 def process_index(job_id: int, db: Session = Depends(get_db)):
@@ -29,12 +31,14 @@ def process_index(job_id: int, db: Session = Depends(get_db)):
     db.commit()
     return job
 
+
 @pipeline_router.get("/id/{job_id}/cancel")
 def process_index(job_id: int, db: Session = Depends(get_db)):
     job = db.query(Pipeline).filter(Pipeline.id == job_id).first()
     job.status = PipelineStatus.ERROR
     db.commit()
     return job
+
 
 @pipeline_router.get("/status/{status}")
 def process_index(status: PipelineStatus, db: Session = Depends(get_db)):

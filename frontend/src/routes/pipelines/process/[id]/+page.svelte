@@ -1,15 +1,15 @@
 <script lang="ts">
     import type {PageData} from "./$types";
-    import type {PipelineWithImageCount} from "$lib/endpoints";
+    import type {PipelineWithSampleCount} from "$lib/endpoints";
     import {endpoint} from "$lib/api";
     import {poll} from "$lib/poll";
 
     export let data: PageData;
 
-    let pipelinePromise = endpoint<PipelineWithImageCount>(`pipeline/id/${data.id}`)
+    let pipelinePromise = endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
 
     poll(async () => {
-        let awaited = await endpoint<PipelineWithImageCount>(`pipeline/id/${data.id}`)
+        let awaited = await endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
         pipelinePromise = Promise.resolve(awaited)
     }, 1000);
 
@@ -22,10 +22,10 @@
                 Pipeline creation
             </span>
             <span class="step-item">
-                Image capturing
+                Sample capturing
             </span>
             <span class="step-item active">
-                Image processing
+                Sample processing
             </span>
             <span class="step-item">
                 Model building
@@ -37,7 +37,7 @@
         <div class="card mt-4 flex-grow-1">
             <div class="card-header">
                 <div class="card-title">
-                    <h1>Processing Images for #{data.id}</h1>
+                    <h1>Processing Sample for #{data.id}</h1>
                 </div>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center flex-column gap-3 p-5">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <br/>
-                    <p>Images captured: <b>{pipelineSync.image_count}</b></p>
+                    <p>Images captured: <b>{pipelineSync.sample_count}</b></p>
                 {:catch error}
                     <p>Failed to load pipeline: {error.message}</p>
                 {/await}

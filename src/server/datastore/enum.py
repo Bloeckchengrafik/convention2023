@@ -20,10 +20,3 @@ class DatasetType(StrEnum):
     SCAN = 'machine'
     TEST = 'test'
 
-
-class ScannerPosition(StrEnum):
-    """
-    Enum for scanner position
-    """
-    LEFT = 'left'
-    RIGHT = 'right'

@@ -14,6 +14,6 @@ export type Pipeline = {
 }
 
 
-export type PipelineWithImageCount = Pipeline & {
-    image_count: number;
+export type PipelineWithSampleCount = Pipeline & {
+    sample_count: number;
 }

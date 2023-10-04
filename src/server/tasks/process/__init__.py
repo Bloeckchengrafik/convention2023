@@ -1,10 +1,7 @@
 import dataclasses
-import time
-
 import cv2
 
 from server.datastore import ScanImages, DbSession
-from server.tasks.process.stages.find_line import find_line
 from server.utils.asynctasks import AsyncTask
 from concurrent.futures import ProcessPoolExecutor
 

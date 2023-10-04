@@ -6,13 +6,12 @@ from server.utils.asynctasks import AsyncTask
 
 
 class ScannerFactory(AsyncTask):
-    def __init__(self, pipeline_id: int, dataset: DatasetType, resolution):
+    def __init__(self, pipeline_id: int, dataset: DatasetType):
         self.pipeline_id = pipeline_id
         self.dataset = dataset
-        self.resolution = resolution
 
     async def impl(self):
-        images = await self.get_scanner_cls()(self.pipeline_id, self.resolution).run_scan()
+        images = await self.get_scanner_cls()(self.pipeline_id).run_scan()
         # Save images to database
         with DbSession() as db:
             db.add_all([image.into_db(self.pipeline_id) for image in images])

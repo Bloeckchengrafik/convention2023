@@ -1,15 +1,15 @@
 <script lang="ts">
     import type {PageData} from "./$types";
-    import type {PipelineWithImageCount} from "$lib/endpoints";
+    import type {PipelineWithSampleCount} from "$lib/endpoints";
     import {endpoint} from "$lib/api";
     import {poll} from "$lib/poll";
 
     export let data: PageData;
 
-    let pipelinePromise = endpoint<PipelineWithImageCount>(`pipeline/id/${data.id}`)
+    let pipelinePromise = endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
 
     poll(async () => {
-        let awaited = await endpoint<PipelineWithImageCount>(`pipeline/id/${data.id}`)
+        let awaited = await endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
         pipelinePromise = Promise.resolve(awaited)
     }, 1000);
 
@@ -30,7 +30,7 @@
         function countup() {
             if (countdownPercent < 100) {
                 countdownPercent += 10
-                setTimeout(countup, 1000)
+                setTimeout(countup, 1500)
             } else {
                 resolveFn()
             }
@@ -59,10 +59,10 @@
                 Pipeline creation
             </span>
             <span class="step-item active">
-                Image capturing
+                Sample capturing
             </span>
             <span class="step-item">
-                Image processing
+                Sample processing
             </span>
             <span class="step-item">
                 Model building
@@ -74,14 +74,14 @@
         <div class="card mt-4 flex-grow-1">
             <div class="card-header">
                 <div class="card-title">
-                    <h1>Capturing Images for #{data.id} (Mode: {data.env})</h1>
+                    <h1>Capturing Samples for #{data.id} (Mode: {data.env})</h1>
                 </div>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center flex-column gap-3 p-5">
                 {#await pipelinePromise}
                     <p>Waiting for pipeline ...</p>
                 {:then pipelineSync}
-                    <h3>Capturing images: <span class="text-capitalize status status-green">{pipelineSync.status}</span>
+                    <h3>Capturing samples: <span class="text-capitalize status status-green">{pipelineSync.status}</span>
                     </h3>
                     <div class="container-narrow">
                         <div class="progress progress-lg">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <br/>
-                    <p>Images captured: <b>{pipelineSync.image_count}</b></p>
+                    <p>Samples captured: <b>{pipelineSync.sample_count}</b></p>
                 {:catch error}
                     <p>Failed to load pipeline: {error.message}</p>
                 {/await}

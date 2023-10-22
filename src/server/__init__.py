@@ -15,6 +15,7 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 app.include_router(router)
 
+
 @dataclass
 class IndexResponse:
     message: str
@@ -26,7 +27,7 @@ class IndexResponse:
 @app.get("/")
 def index() -> IndexResponse:
     return IndexResponse(
-        message="Damn, we're live!",
+        message="It's the final countdown...",
         server_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
         git_commit_hash=git_commit_hash()
     )

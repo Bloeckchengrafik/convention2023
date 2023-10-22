@@ -11,7 +11,8 @@
         X,
         Scissors,
         CheckCircle,
-        Warning
+        Warning,
+        EggCrack
     } from "phosphor-svelte";
     import {endpoint} from "$lib/api";
 
@@ -32,7 +33,8 @@
         "processing": Cpu,
         "cutting": Scissors,
         "done": CheckCircle,
-        "error": Warning
+        "error": Warning,
+        "BUILDING": EggCrack
     }
 </script>
 

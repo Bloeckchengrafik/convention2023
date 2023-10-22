@@ -1,27 +1,25 @@
 <script lang="ts">
-    import type {PageData} from "./$types";
+    import type {PageData} from "../../../../../.svelte-kit/types/src/routes";
     import type {PipelineWithSampleCount} from "$lib/endpoints";
     import {endpoint} from "$lib/api";
     import {poll} from "$lib/poll";
-    import {goto} from "$app/navigation";
 
     export let data: PageData;
 
     let pipelinePromise = endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
 
-    let startedTranfer = false
-
     poll(async () => {
         let awaited = await endpoint<PipelineWithSampleCount>(`pipeline/id/${data.id}`)
         pipelinePromise = Promise.resolve(awaited)
-
-        if (awaited.status === "BUILDING" && !startedTranfer) {
-            startedTranfer = true
-            await new Promise(resolve => setTimeout(resolve, 1000))
-            await goto(`/pipelines/build/${data.id}`)
-        }
     }, 1000);
 
+
+    $: (async () => {
+        let pipeline = await pipelinePromise
+        if (pipeline.status === "done") {
+            window.location.href = `/`
+        }
+    })()
 </script>
 
 <div class="h-full row">
@@ -33,32 +31,36 @@
             <span class="step-item">
                 Sample capturing
             </span>
-            <span class="step-item active">
+            <span class="step-item">
                 Sample processing
             </span>
             <span class="step-item">
                 Model building
             </span>
-            <span class="step-item">
+            <span class="step-item active">
                 Cutting
             </span>
         </div>
         <div class="card mt-4 flex-grow-1">
             <div class="card-header">
                 <div class="card-title">
-                    <h1>Processing Sample for #{data.id}</h1>
+                    <h1>Capturing Samples for #{data.id} (Mode: {data.env})</h1>
                 </div>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center flex-column gap-3 p-5">
                 {#await pipelinePromise}
                     <p>Waiting for pipeline ...</p>
-                {:then sync}
-                    <h3>Just a second...</h3>
+                {:then pipelineSync}
+                    <h3>Current Step: <span
+                            class="text-capitalize status status-green">{pipelineSync.status}</span>
+                    </h3>
                     <div class="container-narrow">
                         <div class="progress progress-lg">
-                                <div class="progress-bar progress-bar-indeterminate"></div>
+                            <div class="progress-bar progress-bar-indeterminate"></div>
                         </div>
                     </div>
+                    <br/>
+                    <p>Please wait</p>
                 {:catch error}
                     <p>Failed to load pipeline: {error.message}</p>
                 {/await}

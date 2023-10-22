@@ -5,7 +5,7 @@ export type IndexEndpoint = {
     version: string;
 };
 
-export type PipelineStatus = 'pending' | 'processable' | 'processing' | 'cutting' | 'done' | 'error';
+export type PipelineStatus = 'pending' | 'processable' | 'processing' | 'cutting' | 'done' | 'error' | 'BUILDING';
 
 export type Pipeline = {
     id: number;

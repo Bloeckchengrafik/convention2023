@@ -18,7 +18,7 @@
         let pipeline = await pipelinePromise
         if (pipeline.status === "pending") {
             // Launch pipeline
-            await new Promise(resolve => setTimeout(resolve, 500))
+            await new Promise(resolve => setTimeout(resolve, 100))
             await endpoint(`scan/p/${data.id}/run?dataset=${data.env}&resolution=5`)
         }
     })()
@@ -30,7 +30,7 @@
         function countup() {
             if (countdownPercent < 100) {
                 countdownPercent += 10
-                setTimeout(countup, 1500)
+                setTimeout(countup, 500)
             } else {
                 resolveFn()
             }

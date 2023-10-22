@@ -38,6 +38,7 @@ def is_authenticated():
 
             return {"ok": True, "error": f"Welcome back, {name}!"}
         else:
+            print("Invalid Key SID, got", yubikey.serial())
             return {"ok": False, "error": "Invalid Key SID"}
     except yubico.yubico_exception.YubicoError:
         return {"ok": False, "error": "Authentication failed."}

@@ -25,6 +25,7 @@ class Pipeline(Base):
     status = Column(Enum(PipelineStatus))
 
     samples = relationship("ScanSample", back_populates="pipeline")
+    coords = relationship("ScanCoordinates", back_populates="pipeline")
 
 
 class ScanSample(Base):
@@ -38,6 +39,18 @@ class ScanSample(Base):
     sample = Column(Float)
 
     pipeline = relationship("Pipeline", back_populates="samples")
+
+
+class ScanCoordinates(Base):
+    __tablename__ = "scan_coords"
+
+    id = Column(Integer, primary_key=True, index=True)
+    pipeline_id = Column(Integer, ForeignKey(Pipeline.id))
+    x = Column(Float)
+    y = Column(Float)
+    z = Column(Float)
+
+    pipeline = relationship("Pipeline", back_populates="coords")
 
 
 def init_database():

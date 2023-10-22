@@ -1,5 +1,6 @@
 import abc
 import asyncio
+import threading
 
 
 class AsyncTask(abc.ABC):
@@ -14,4 +15,10 @@ class AsyncTask(abc.ABC):
 
     def __call__(self, *args, **kwargs):
         """Run the task."""
-        asyncio.get_event_loop().create_task(self.impl(*args, **kwargs))
+        # new thread, create new event loop and run the task
+        def _thread():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(self.impl(*args, **kwargs))
+
+        threading.Thread(target=_thread).start()

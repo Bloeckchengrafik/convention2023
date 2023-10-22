@@ -7,3 +7,8 @@ venv
 database.db
 data/
 admin_serial.txt
+
+mesh.png
+mesh.stl
+rot_dict.data
+stepper_commands.hcode

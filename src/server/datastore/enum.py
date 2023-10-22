@@ -8,6 +8,7 @@ class PipelineStatus(StrEnum):
     PENDING = 'pending'
     PROCESSABLE = 'processable'
     PROCESSING = 'processing'
+    BUILDING = 'BUILDING'
     CUTTING = 'cutting'
     DONE = 'done'
     ERROR = 'error'

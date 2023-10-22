@@ -1,7 +1,9 @@
+export const root = "http://192.168.178.190:5000/";
+
 export async function endpoint<T>(ep: string): Promise<T> {
     let res: Response;
     try {
-        res = await fetch(`http://127.0.0.1:5000/${ep}`);
+        res = await fetch(`${root}${ep}`);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         // no network error reporting
